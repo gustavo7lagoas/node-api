@@ -17,8 +17,8 @@ app.use(bodyParser.json());
 var port     = process.env.PORT || 8080; // set our port
 
 var mongoose   = require('mongoose');
-mongoose.connect('mongodb://node:node@novus.modulusmongo.net:27017/Iganiq8o'); // connect to our database
-var Bear     = require('./app/models/bear');
+mongoose.connect('mongodb://chaordicacademy:fullstack@ds031952.mongolab.com:31952/rest-api-superheroes'); // connect to our database
+var Superhero  = require('./app/models/superhero');
 
 // ROUTES FOR OUR API
 // =============================================================================
@@ -35,75 +35,77 @@ router.use(function(req, res, next) {
 
 // test route to make sure everything is working (accessed at GET http://localhost:8080/api)
 router.get('/', function(req, res) {
-	res.json({ message: 'hooray! welcome to our api!' });	
+	res.json({ message: 'hooray! welcome to our api!' });
 });
 
-// on routes that end in /bears
+// on routes that end in /superheros
 // ----------------------------------------------------
-router.route('/bears')
+router.route('/superheroes')
 
-	// create a bear (accessed at POST http://localhost:8080/bears)
+	// create a superhero (accessed at POST http://localhost:8080/superheroes)
 	.post(function(req, res) {
-		
-		var bear = new Bear();		// create a new instance of the Bear model
-		bear.name = req.body.name;  // set the bears name (comes from the request)
 
-		bear.save(function(err) {
+		var superhero = new Superhero();		// create a new instance of the Superhero model
+		superhero.name = req.body.name;  // set the superheroes name (comes from the request)
+        superhero.power = req.body.power;
+        superhero.age = req.body.age;
+
+		superhero.save(function(err) {
 			if (err)
 				res.send(err);
 
-			res.json({ message: 'Bear created!' });
+			res.json({ message: 'Superhero created!' });
 		});
 
-		
+
 	})
 
-	// get all the bears (accessed at GET http://localhost:8080/api/bears)
+	// get all the superheros (accessed at GET http://localhost:8080/api/superheroes)
 	.get(function(req, res) {
-		Bear.find(function(err, bears) {
+		Superhero.find(function(err, superheros) {
 			if (err)
 				res.send(err);
 
-			res.json(bears);
+			res.json(superheros);
 		});
 	});
 
-// on routes that end in /bears/:bear_id
+// on routes that end in /superheros/:superhero_id
 // ----------------------------------------------------
-router.route('/bears/:bear_id')
+router.route('/superheros/:superhero_id')
 
-	// get the bear with that id
+	// get the superhero with that id
 	.get(function(req, res) {
-		Bear.findById(req.params.bear_id, function(err, bear) {
+		Superhero.findById(req.params.superhero_id, function(err, superhero) {
 			if (err)
 				res.send(err);
-			res.json(bear);
+			res.json(superhero);
 		});
 	})
 
-	// update the bear with this id
+	// update the superhero with this id
 	.put(function(req, res) {
-		Bear.findById(req.params.bear_id, function(err, bear) {
+		Superhero.findById(req.params.superhero_id, function(err, superhero) {
 
 			if (err)
 				res.send(err);
 
-			bear.name = req.body.name;
-			bear.save(function(err) {
+			superhero.name = req.body.name;
+			superhero.save(function(err) {
 				if (err)
 					res.send(err);
 
-				res.json({ message: 'Bear updated!' });
+				res.json({ message: 'Superhero updated!' });
 			});
 
 		});
 	})
 
-	// delete the bear with this id
+	// delete the superhero with this id
 	.delete(function(req, res) {
-		Bear.remove({
-			_id: req.params.bear_id
-		}, function(err, bear) {
+		Superhero.remove({
+			_id: req.params.superhero_id
+		}, function(err, superhero) {
 			if (err)
 				res.send(err);
 
