@@ -1,0 +1,4 @@
+fullstack
+chaordicacademy
+mongo ds031952.mongolab.com:31952/rest-api-superheroes -u <dbuser> -p <dbpassword>
+mongodb://<dbuser>:<dbpassword>@ds031952.mongolab.com:31952/rest-api-superheroes

@@ -6,7 +6,8 @@
     "url": "git://github.com/scotch-io/node-token-authentication"
   },
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "test": "mocha --recursive -R spec --timeout 30000 ./test/"
   },
   "author": "Chris Sevilleja <scotch.io>",
   "license": "MIT",
@@ -15,5 +16,11 @@
     "morgan": "~1.0.0",
     "mongoose": "~3.6.13",
     "body-parser": "~1.0.1"
+  },
+  "devDependencies": {
+    "chai": "^2.3.0",
+    "factory-girl": "^1.5.0",
+    "mocha": "^2.2.5",
+    "supertest": "^1.0.1"
   }
 }
