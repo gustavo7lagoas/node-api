@@ -71,7 +71,7 @@ router.route('/superheroes')
 
 // on routes that end in /superheros/:superhero_id
 // ----------------------------------------------------
-router.route('/superheros/:superhero_id')
+router.route('/superheroes/:superhero_id')
 
 	// get the superhero with that id
 	.get(function(req, res) {
